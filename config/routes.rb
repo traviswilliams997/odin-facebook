@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  resources :posts
+
+  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
   resources :users, only: [:show]
+
+  resources :posts do
+    resources :comments
+  end
 
   post 'users/:id/follow', to: 'users#follow', as: 'follow'
   post 'users/:id/unfollow', to: 'users#unfollow', as: 'unfollow'
