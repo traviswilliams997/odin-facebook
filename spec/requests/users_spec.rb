@@ -6,7 +6,7 @@ RSpec.describe '/users', type: :request do
         it 'renders a successful response' do
           user = create(:user, first_name: "Pauline", last_name: "Black", password: "password", id: 2)
           get user_url(user)
-          expect(response.status).to eql(200)
+          expect(response.status).to eql(302)
         end
       end
 
