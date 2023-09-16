@@ -2,13 +2,24 @@
 
 <h1>Posts</h1>
 
+<%= link_to "New post", new_post_path %>
+
 <div id="posts">
   <% @posts.each do |post| %>
     <%= render post %>
     <p>
       <%= link_to "Show this post", post %>
     </p>
+    <div >
+  <%= render 'comments/form', 
+    post: post, 
+    comment: post.comments.build,
+    submit_label: "Reply" %>
+    <% get_comments(post).each do |comment| %>
+    <%= render 'comments/comment', 
+    post: post, 
+    comment: comment %>
+
+  <% end %>
   <% end %>
 </div>
-
-<%= link_to "New post", new_post_path %>

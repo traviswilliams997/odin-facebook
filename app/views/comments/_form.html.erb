@@ -1,0 +1,6 @@
+<%= form_with(model: [post, comment]) do |f| %>
+  <div>
+    <%= f.rich_text_area :body %>
+    <%= f.submit submit_label %>
+  </div>
+<% end %>
