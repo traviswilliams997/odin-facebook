@@ -1,0 +1,18 @@
+<div>
+<%= likeable.likes.count %> Likes
+<% like = get_current_like(likeable)%>
+<%if like.nil? %>
+ <form action="/likes" method="post">
+  <input type="hidden" name="authenticity_token"  value="<%= form_authenticity_token %>">
+  <input type="hidden" name="like[likeable_id]" value="<%= likeable.id %>">
+  <input type="hidden" name="like[likeable_type]" value="<%= likeable.class.to_s%>">
+  <p><input type="submit" value="Like"></p>
+</form>
+<%else%>
+ <form action="<%= like_path(like) %>" method="post">
+  <input type="hidden" name="authenticity_token"  value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <p><input type="submit" value="Unlike"></p>
+</form>
+<%end%>
+</div>

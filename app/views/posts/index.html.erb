@@ -7,19 +7,18 @@
 <div id="posts">
   <% @posts.each do |post| %>
     <%= render post %>
+    <%= render partial: 'likes/button', locals: { likeable: post }%>
     <p>
       <%= link_to "Show this post", post %>
     </p>
-    <div >
   <%= render 'comments/form', 
-    post: post, 
-    comment: post.comments.build,
-    submit_label: "Reply" %>
-    <% get_comments(post).each do |comment| %>
+      post: post, 
+      comment: post.comments.build,
+      submit_label: "Reply" %>
+  <% get_comments(post).each do |comment| %>
     <%= render 'comments/comment', 
-    post: post, 
-    comment: comment %>
-
+        post: post, 
+        comment: comment %>
   <% end %>
   <% end %>
 </div>

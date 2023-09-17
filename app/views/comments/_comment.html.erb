@@ -1,5 +1,6 @@
 <div >
   <%= comment.body%> <br />
+  <%= render partial: 'likes/button', locals: { likeable: comment }%>
  <hr />  
   <%= comment.user.email %><br />
   <% if (comment.updated_at - comment.created_at) > 1 %>
@@ -10,6 +11,4 @@
   <%if current_user == comment.user %>
      <%= button_to "Delete", [post, comment], method: :delete %>
   <%end%>
- 
-
 </div>
