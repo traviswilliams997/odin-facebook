@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   include CommentsHelper
   include PostsHelper
-
+  include LikesHelper
   # GET /posts or /posts.json
   def index
     @posts = Post.all.includes(:user, :comments).order(created_at: :desc)
