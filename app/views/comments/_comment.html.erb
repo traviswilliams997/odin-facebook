@@ -1,5 +1,8 @@
-<div >
-  <%= comment.body%> <br />
+
+<div style="border: 1px solid black;">
+ <div id="comment-body-<%= comment.id %>" >
+    <%= comment.body %>
+  </div>
   <%= render partial: 'likes/button', locals: { likeable: comment }%>
  <hr />  
   <%= comment.user.email %><br />
@@ -8,7 +11,26 @@
   <% else %>
     <span>Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
   <% end %>
+
   <%if current_user == comment.user %>
-     <%= button_to "Delete", [post, comment], method: :delete %>
+    <%= link_to "Edit", nil, remote: true,  data: {
+        controller: "comments",
+        action: "comments#toggleForm",
+        comments_form_param: "edit-form-#{comment.id}",
+        comments_body_param: "comment-body-#{comment.id}",
+        comments_edit_param: "edit-button-#{comment.id}"
+      },
+      id: "edit-button-#{comment.id}" %>
+
+
+    <%= button_to "Delete", [post, comment], method: :delete %>
+
+   <div id="edit-form-<%= comment.id%>" class = 'hideform'>
+      <%= render 'comments/form',
+       post: post,
+       comment: comment,
+       submit_label: "Update" %>
+    </div>
+
   <%end%>
 </div>
