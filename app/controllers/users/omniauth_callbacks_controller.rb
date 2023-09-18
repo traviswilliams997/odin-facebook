@@ -8,6 +8,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def twitter
   # end
 
+  def facebook
+    user = User.from_omniauth(auth)
+    if user.present?
+      flash[:success] = t 'devise.onniauth_callbacks.success', kind: 'Google'
+      sign_in_and_redirect user, event: :authentification
+    else
+      flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized"
+      redirect_to new_user_session_path
+    end
+  end
+
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
 
@@ -27,4 +38,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def after_omniauth_failure_path_for(scope)
   #   super(scope)
   # end
+
+  private 
+
+  def auth 
+    @auth ||= request.env['omniauth.auth']
+  end
 end
