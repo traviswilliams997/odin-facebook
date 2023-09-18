@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
+  before_action :set_user, except: [:index]
 
   def show; end
 
+  def index
+    @users = User.all
+  end
   def follow
     current_user.send_follow_request_to(@user)
     redirect_to user_path(@user)
