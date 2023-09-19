@@ -13,7 +13,8 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @comments = get_comments(@post)
-    mark_notifications_as_read
+    current_user.notifications.mark_as_read!
+
   end
 
   # GET /posts/new
@@ -75,10 +76,4 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :body, :user_id)
     end
 
-    def mark_notifications_as_read
-      if current_user
-        notifications_to_mark_as_read = @post.notifications.where(recipient: current_user)
-        notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
-      end
-    end
 end
