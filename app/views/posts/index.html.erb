@@ -1,23 +1,394 @@
-<h1>Posts</h1>
+<div class= "container-fluid " >
 
-<%= link_to "New post", new_post_path %>
+  <div class="row justify-content-evenly ">
+    <!-- Sidebar -->
+    <div class = "col-12 col-lg-3 ">
+      <div class = "d-none d-xxl-block h-100 fixed-top overflow-hidden scrollbar" style= "max-width: 360px; width: 100%; z-index: 4;" >
+       <ul class= "navbar-nav mt-4 ms-3 d-flex flex-column pb-5 mb-5" style= "padding-top: 56px;" >
+         <!-- top -->
+         <!-- avatar -->
+
+         <li class="dropdown-item p-1 rounded">
+           <a href="/users/<%= current_user.id%>" class="text-decoration-none text-dark  d-flex align-items-center">
+             <div class = "p-2">
+              <%=  image_tag(current_user.avatar, class: "rounded-circle me-2", style:  "width: 38px; height: 38px; object-fit: cover;") if current_user.avatar.attached? %>
+              <% unless current_user.avatar.attached? %>
+                <img src="https://source.unsplash.com/collection/happy-people", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+              <%end%>
+             </div>
+              <div >
+                <p class="m-0"><%= current_user.first_name %></p>
+              </div>
+           </a>
+         </li>
+
+          <!-- t 1 -->
+
+         <li class="dropdown-item p-1 rounded">
+           <a href="#" class="text-decoration-none text-dark  d-flex align-items-center">
+             <div class = "p-2"> 
+                <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y6/r/i0pziEs5Wj6.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+             </div>
+             <div >
+               <p class="m-0">Friends</p>
+             </div>
+           </a>
+         </li>
+
+          <!-- t 2 -->
+
+         <li class="dropdown-item p-1 rounded">
+           <a href="#" class="text-decoration-none text-dark  d-flex align-items-center">
+             <div class = "p-2"> 
+                <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y8/r/he-BkogidIc.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+             </div>
+             <div >
+               <p class="m-0">Memories</p>
+             </div>
+           </a>
+         </li>
+
+          <!-- t 3 -->
+
+         <li class="dropdown-item p-1 rounded">
+           <a href="#" class="text-decoration-none text-dark  d-flex align-items-center">
+             <div class = "p-2"> 
+                <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/k0Svfg6IJtR.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+             </div>
+             <div >
+               <p class="m-0">Saved</p>
+             </div>
+           </a>
+         </li>
+          <!-- t 4 -->
+
+         <li class="dropdown-item p-1 rounded">
+           <a href="#" class="text-decoration-none text-dark  d-flex align-items-center">
+             <div class = "p-2"> 
+                <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/MhkwI3R0SHP.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+             </div>
+             <div >
+               <p class="m-0">Groups</p>
+             </div>
+           </a>
+         </li>
+          <!-- t 5 -->
+
+         <li class="dropdown-item p-1 rounded">
+           <a href="#" class="text-decoration-none text-dark  d-flex align-items-center">
+             <div class = "p-2"> 
+                <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/XNFKm5WC2yS.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+             </div>
+             <div >
+               <p class="m-0">Videos</p>
+             </div>
+           </a>
+         </li>
+          <!-- t 1 -->
+
+       <!-- see more  -->
+       <li class="p-1" type="button">
+         <div  id="accordionExample">
+          <div >
+          <!-- see more  -->
+            <div >
+              <div class="d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <div class="p-2">
+                  <i class ="fas fa-chevron-down rounded-circle p-2" style="background-color: #d5d5d5 !important"></i> 
+                </div>
+                <div >
+                  <p class="m-0">See More</p>
+                </div>
+              </div>
+            </div>
+            <!-- content  -->
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div >
+                 <!-- item 2-->
+                <div class="d-flex align-items-center dropdown-item p-0 m-0 ">
+                  <div class="p-2" >
+                    <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/qfMB40PdgWb.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" > 
+                  </div>
+                  <div >
+                  <p class="m-0"> Events </p>
+                  </div>
+                </div>
+                 <!-- item 3-->
+                <div class="d-flex align-items-center dropdown-item p-0 m-0 ">
+                  <div class="p-2" >
+                    <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/-6zDH4i8Hrw.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" > 
+                  </div>
+                  <div >
+                  <p class="m-0"> NewsFeed </p>
+                  </div>
+                </div>
+
+                 <!-- item 1-->
+                <div class="d-flex align-items-center dropdown-item p-0 m-0 ">
+                  <div class="p-2" >
+                    <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/YfOs3-aAEm6.png", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" > 
+                  </div>
+                  <div >
+                  <p class="m-0"> Fundraisers </p>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+         </div> 
+        </div>
+       </li>
+
+         <!-- shortcut -->
+         <hr class="m-0">
+         <!-- heading-->
+         <div class="d-flex align-items-center justify-content-between mt-2 text-muted edit-heading">     
+           <h4 class ="m-0 text-muted"> You Shortcuts </h4>
+           <p class="m-0 text-primary me-3 edit-button" type="button">Edit</p>
+         </div>   
+         
+         
+       </ul>
+      <!-- term -->
+
+      <div class ="p-2 mt-5 copy ">
+        <p class = "text-muted fs-7">Privacy &#8226 Terms &#8226 Advertising &#8226 Ad Choices &#8226 Cookies 
+        </p> 
+        <p class= "text-muted fs-7 mt-0">OdinFacebook & copy; 2023</p>
+      </div>
+      </div>
+    
+    </div>
+
+    <!-- Timeline -->
+    <div class = "col-12 col-lg-6 ">
+       <div
+            class="d-flex flex-column justify-content-center w-100 mx-auto h-100"
+            style="padding-top: 56px; max-width: 680px;"
+          >
+        <!-- stories -->
+         <div class="bg-white p-3 mt-3 rounded border shadow">
+           <div class="d-flex" type="button">
+              <div class="p-1">
+               <i class="fa-solid fa-circle-plus bg-gray p-2 rounded-circle"></i>
+              </div>
+              <input type="text" class="form-control rounded-pil border-0 bg-gray pointer"
+                     placeholder="Create your story"
+              >
+            </div>
+            
+         </div>
+        <!-- create posts --> 
+        <a href="/posts/new" class="text-decoration-none">
+          <div class="bg-white p-3 mt-3 rounded border shadow">
+            <!-- avatar -->
+            <div class="d-flex" type="button">
+              <div class="p-1">
+                <%=  image_tag(current_user.avatar, class: "rounded-circle me-2", style:  "width: 38px; height: 38px; object-fit: cover;") if current_user.avatar.attached? %>
+                <% unless current_user.avatar.attached? %>
+                  <img src="https://source.unsplash.com/collection/happy-people", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+                <%end%>
+              </div>
+              <input type="text" class="form-control rounded-pil border-0 bg-gray pointer"
+                     placeholder="What's on your mind, <%= current_user.first_name%>"
+              >
+            </div>
+            <!-- cretae modal -->
+            <!-- actions -->
+            <div class="d-flex flex-column flex-lg-row mt-3 ">
+            <!-- a1 -->
+            <div class="d-flex align-items-center justify-content-center rounded dropdown-item mx-2"
+               type="button">
+              <i class="fa-solid fa-video me-2 text-danger"></i>
+              <p class="m-0 text-muted"> Live Video </p>
+            </div>
+             <!-- a2 -->
+            <div class="d-flex align-items-center justify-content-center rounded dropdown-item mx-2 "
+               type="button">
+              <i class="fa-solid fa-photo-video me-2 text-success"></i>
+              <p class="m-0 text-muted"> Photo/video </p>
+            </div>
+             <!-- a3 -->
+            <div class="d-flex align-items-center justify-content-center rounded dropdown-item mx-2"
+               type="button">
+              <i class="fa-solid fa-smile me-2 text-warning"></i>
+              <p class="m-0 text-muted"> Feeling/actvity </p>
+            </div>
+            </div>
+        
+          </div>
+        </a>
+        <!--posts -->
+        <!-- p1 -->
+        
+        <% @posts.each do |post| %>
+         <div class="bg-white p-4 rounded shadow mt-3">
+               <div class="d-flex justify-content-between">
+              <div class="d-flex">
+                <%=  image_tag(get_user(post.user_id).avatar, class: "rounded-circle me-2", style:  "width: 38px; height: 38px; object-fit: cover;") if get_user(post.user_id).avatar.attached? %>
+                <% unless get_user(post.user_id).avatar.attached? %>
+                  <img src="https://source.unsplash.com/collection/happy-people", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+                <%end%>
+                <div class="d-flex flex-column">
+                  <p class="m-0 fw-bold">
+                    <%= post.user.first_name %>
+                  </p>
+                  <span class ="text-muted fs-7">Posted <%= time_ago_in_words(post.created_at) %> ago</span>
+                  </div>
+              </div>
+              </div>
+             <br>
+               <hr>
+                <p class="mx-5 fs-4">
+                  <%= post.body %>
+                </p>
+               <hr>
+
+              <%= render partial: 'likes/button', locals: { likeable: post }%>
+           
+              <%= render 'comments/form', 
+                post: post, 
+                comment: post.comments.build,
+                submit_label: "Reply" 
+              %>
+              
+              <% get_comments(post).each do |comment| %>
+                <div class="bg-gray p-4 rounded shadow mt-3">
+                <%= render 'comments/comment', 
+                    post: post, 
+                    comment: comment %>
+                    </div>
+            <% end %>
+      </div>
+          <% end %>
+
+      </div>
+        
+
+    </div>
+    
+
+    <!-- Chatbar -->
+    <div class = "col-12 col-lg-3">
+      <div class="d-none d-xxl-block h-100 fixed-top end-0 overflow-hidden scrollbar"
+           style="max-width: 360px; width: 100%; z-index: 4; padding-top: 56px; left: initial !important;">
+        <div class="p-3 mt-1" >
+
+            <!--  contacts-->
+            <div class="d-flex align-items-center justify-content-between my-3" >
+              <!-- heading -->
+              <p class= "text-muted fs-5 m-0">Contacts</p>
+
+              <!-- icons -->
+              <div class="text-muted ">
+                <!-- i 1 -->
+                <i class ="fa-solid fa-video mx-2" type="button"></i>
+                <!-- i 2 -->
+                <i class ="fa-solid fa-search mx-2" type="button"></i>
+                <!-- i 3 -->
+                <i class ="fa-solid fa-ellipsis-h mx-2" type="button"></i>
+           
+              </div>
+            </div>
+
+            <!-- friends -->
+
+            
+              <!-- avatar -->
+
+              <% friendCount = 0%>
+            <% @users.each_with_index do |user, index| %>
+              <% if current_user.following?(user) %> 
+                <% break unless user.present? %>
+                <% break  if friendCount == 15 %>
+                <% if user.posts.last.present? %>
+                  <li class="dropdown-item rounded my-2 px-0" type="button">
+                    <div class="d-flex align-items-center mx-2">
+                      <!-- big avatar -->
+                      <div class ="position-relative">
+                        <% friendCount += 1%>
+                        <!-- avatar -->
+                  
+                        <%=  image_tag(user.avatar, class: "rounded-circle me-2", style: "width: 38px; height: 38px; object-fit: cover;") if user.avatar.attached? %>
+                        <span class="position-absolute bottom-0 translate-middle border border-light rounded-circle bg-success p-1" style="left: 75%;">
+                          <span class="visually-hidden" ></span>
+                        </span>
+                        <% unless user.avatar.attached? %>
+                          <img src="https://source.unsplash.com/random/<%= index %>", class= "rounded-circle ", style= "width: 38px; height: 38px; object-fit: cover;" >
+                          <span class="position-absolute bottom-0 translate-middle border border-light rounded-circle bg-success p-1" style="left: 75%;">
+                            <span class="visually-hidden" ></span>
+                          </span>
+                        <%end%>
+                      </div>
+                      <p class ="m-0"><%= user.first_name %></p>
+                   </div>
+            
+                  </li>
+               <%end%>
+              <%end%>
+            <%end%>
+           
+            <!-- --group conversations -->
+            <hr class="m-0" />
+            <p class= "text-muted fs-5 m-0">Group conversations</p>
+
+            <div class ="d-flex"> 
+              <!-- icon-->
+              <i class="fa-solid fa-circle-plus bg-gray p-2 rounded-circle"></i>
+              <div class="d-flex justify-content-between align-items-center w-100 ms-3">
+                <p class="m-0">Create new group </p>
+              </div>
+            </div>
+                
+             
+            
+
+        </div>
+      </div>
+            
+    </div>    <!-- end chatbar--> 
+   <!-- end row justify-content evenly--> 
+  </div>
+    
 
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <%= render partial: 'likes/button', locals: { likeable: post }%>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <%= render 'comments/form', 
-      post: post, 
-      comment: post.comments.build,
-      submit_label: "Reply" %>
-  <% get_comments(post).each do |comment| %>
-    <%= render 'comments/comment', 
-        post: post, 
-        comment: comment %>
-  <% end %>
-  <% end %>
+  
+
+
+
+<!-- 
+     <h1>Posts</h1>
+
+    <%= link_to "New post", new_post_path %>
+
+        
+            <% @posts.each do |post| %>
+                     <div class="bg-white p-4 rounded shadow mt-3" > 
+            <div class="d-flex justify-content-between ">
+              <div class="d-flex">
+                <%=  image_tag(get_user(post.user_id).avatar, class: "rounded-circle me-2", style:  "width: 38px; height: 38px; object-fit: cover;") if get_user(post.user_id).avatar.attached? %>
+                <% unless get_user(post.user_id).avatar.attached? %>
+                  <img src="https://source.unsplash.com/collection/happy-people", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+                <%end%>
+              </div>
+              <%= render post %>
+              <%= render partial: 'likes/button', locals: { likeable: post }%>
+              <p>
+                <%= link_to "Show this post", post %>
+              </p>
+              <%= render 'comments/form', 
+                post: post, 
+                comment: post.comments.build,
+                submit_label: "Reply" 
+              %>
+              <% get_comments(post).each do |comment| %>
+                <%= render 'comments/comment', 
+                    post: post, 
+                    comment: comment %>
+            <% end %>
+           </div>
+           </div>
+          <% end %>
+-->
+    
 </div>

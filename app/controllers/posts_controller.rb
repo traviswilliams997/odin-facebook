@@ -4,9 +4,11 @@ class PostsController < ApplicationController
   include CommentsHelper
   include PostsHelper
   include LikesHelper
+  include NotificationsHelper
   # GET /posts or /posts.json
   def index
     @posts = Post.all.includes(:user, :comments).order(created_at: :desc)
+    @users = User.all
     
   end
 

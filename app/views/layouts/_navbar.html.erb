@@ -1,9 +1,692 @@
-<%if current_user %>
-<div class="topnav">
-   <%= link_to "Home", posts_path, class: "active" %>
-       <%= link_to "People", users_path %>
-    <%= link_to "Profile", user_path(current_user) %>
-    <%= render 'layouts/notifications' %>
-</div>
+<div class="bg-white d-flex align-items-center fixed-top shadow " 
+    style="min-height: 56px; z-index: 5;">
 
-<%end%>
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <!--search -->
+        <div class="col d-flex align-items-center">
+          <!--logo -->
+          <i class="fa-brands fa-facebook text-primary" style="font-size: 3rem"></i>
+    
+          <!--search bar -->
+          <div class="input-group ms-2">
+
+            <!--mobile -->
+            <span class="input-group-prepend  d-lg-none" type="button">
+              <div class="input-group-text bg-gray border-0 rounded-circle" style="min-height: 40px;">
+                <i class="fa-solid fa-magnifying-glass me-2 text-muted"></i> 
+              </div>
+            </span>
+
+            <!--desktop -->
+            <span class="input-group-prepend d-none d-lg-block" type="button">
+              <div class="input-group-text bg-gray border-0 rounded-pill" style="min-height: 40px; min-width: 230px;">
+                <i class="fa-solid fa-magnifying-glass me-2 text-muted"></i>
+                <p class="m-0 fs-7">Search OdinFacebook</p> 
+              </div>
+            </span>
+
+          </div>
+        </div>
+    
+        <!--nav -->
+        <div class="col d-none d-lg-flex justify-content-center">
+
+          <!--home -->
+          <div class ="mx-4 nav__btn nav__btn-active">
+          <a href="/posts">
+            <button class = "btn px-4">
+              
+              <i class="fa-solid fa-house text-muted fs-4"></i>
+            
+            </button>
+              </a>
+            
+          </div>
+
+         
+
+          <!--market -->
+          <div class ="mx-4 nav__btn">
+            <button class = "btn px-4">
+              <i class="fa-solid fa-store text-muted fs-4"></i>
+            </button>
+          </div>
+
+          <!--group -->
+          <div class="mx-4 nav__btn">
+          <a href="/users">
+            <button type="button" class="btn px-4">
+              <i class="fa-solid fa-users position-relative text-muted fs-4">
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style= "font-size: 0.5rem">
+                1
+                <span class="visually-hidden"></span>
+              </span>
+              </i>
+            </button>
+            </a>
+          </div>
+
+          <!--gaming -->
+          <div class ="mx-4 nav__btn ">
+            <button class = "btn px-4">
+              <i class="fa-solid fa-gamepad text-muted fs-4"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!--menus -->
+        <div class="col d-flex align-items-center justify-content-end">
+          <!--avatar -->
+             <a href="/users/<%= current_user.id%>"  class="text-decoration-none text-dark">
+          <div class ="d-none d-xl-flex align-items-center justify-content-center">
+            <%=  image_tag(current_user.avatar, class: "rounded-circle me-2", style: "width: 38px; height: 38px; object-fit: cover;") if current_user.avatar.attached? %>
+            <p class="m-0"><%= current_user.first_name %></p>
+          </div>
+          </a>
+          <!--main menu -->
+          <div class ="d-flex align-items-center justify-content-center p-1 mx-2 bg-gray rounded-circle"
+               style="width: 38px; height: 38px; object-fit: cover;" id = "mainMenu" data-bs-toggle="dropdown" aria-expanded="false" type= "button">
+            <i class="fa-solid fa-ellipsis"></i>
+          </div>
+          <!-- main menu dd -->
+            <ul class="dropdown-menu border-0 shadow p-3 overflow-auto"
+             aria-labelledby="mainMenu" style="width: 23em; max-height: 600px;">
+               <!-- menu -->
+              <div>
+                <!-- header -->
+                <li class ="p-1 mx-2">
+                  <h2>Menu </h2>
+                </li>
+                <!-- search -->
+                <li class = "p-1">
+                  <div 
+                  class = "input-group-text bg-gray border-0 rounded-pill"
+                  style="min-hieght: 40px; min-width: 230px;"
+                  >
+                  <i class = "fa-solid fa-magnifying-glass  me-2 text-muted"> </i>
+                  <input type="text" class="form-control rounded-pill border-0 bg-gray" placeholder="Search Menu"/>
+
+                  
+                  </div>
+                </li>
+                <!-- social items -->
+                <h4 class="m-2">Social</h4>
+                  <!--s 1 -->
+                <li class="my-2 p-1">
+                 <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                 justify-content-between">
+                   <div class="p-2">
+                     <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/qfMB40PdgWb.png" 
+                      alt="icon from fb" 
+                      class="rounded-circle" 
+                      style="width: 48px; height: 48px; object-fit: cover;">
+                   </div>
+                   <div>
+                     <p class="m-0">Events</p>
+                     <span class="fs-7 text muted">Organize or find events and other things to do online or nearby.</span>
+                   </div>
+                 </a>
+                 </li>
+                  <!--s 2 -->
+                <li class="my-2 p-1">
+                 <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                 justify-content-between">
+                   <div class="p-2">
+                     <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y6/r/i0pziEs5Wj6.png" 
+                      alt="icon from fb" 
+                      class="rounded-circle" 
+                      style="width: 48px; height: 48px; object-fit: cover;">
+                   </div>
+                   <div>
+                     <p class="m-0">Find Friends</p>
+                     <span class="fs-7 text muted">Search for friends or people you may know. </span>
+                   </div>
+                 </a>
+                 </li>
+                  <!--s 3 -->
+                <li class="my-2 p-1">
+                 <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                 justify-content-between">
+                   <div class="p-2">
+                     <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yZ/r/MhkwI3R0SHP.png" 
+                      alt="icon from fb" 
+                      class="rounded-circle" 
+                      style="width: 48px; height: 48px; object-fit: cover;">
+                   </div>
+                   <div>
+                     <p class="m-0">Groups</p>
+                     <span class="fs-7 text muted"> Connect with people who share your interests. </span>
+                   </div>
+                 </a>
+                 </li>
+                  <!--s 4 -->
+                <li class="my-2 p-1">
+                 <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                 justify-content-between">
+                   <div class="p-2">
+                     <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/-6zDH4i8Hrw.png" 
+                      alt="icon from fb" 
+                      class="rounded-circle" 
+                      style="width: 48px; height: 48px; object-fit: cover;">
+                   </div>
+                   <div>
+                     <p class="m-0">NewsFeed</p>
+                     <span class="fs-7 text muted"> See relevant posts from people and Pages you follow. </span>
+                   </div>
+                 </a>
+                 </li>
+                  <!--s 5 -->
+                <li class="my-2 p-1">
+                 <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                 justify-content-between">
+                   <div class="p-2">
+                     <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y2/r/7RdHDScIkAe.png" 
+                      alt="icon from fb" 
+                      class="rounded-circle" 
+                      style="width: 48px; height: 48px; object-fit: cover;">
+                   </div>
+                   <div>
+                     <p class="m-0">Pages</p>
+                     <span class="fs-7 text muted"> Discover and connect with businesses on Facebook </span>
+                   </div>
+                 </a>
+                 </li>
+                <!-- ent items -->
+                <hr />
+                <h4 class="m-2">Entertainment</h4>
+                <!--e 1 -->
+                <li class="my-2 p-1">
+                  <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                   justify-content-between">
+                   <div class="p-2">
+                     <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yJ/r/fGWbDwbx9W4.png" 
+                      alt="icon from fb" 
+                      class="rounded-circle" 
+                      style="width: 48px; height: 48px; object-fit: cover;">
+                   </div>
+                   <div>
+                     <p class="m-0">Gaming Video</p>
+                     <span class="fs-7 text muted"> Watch and connect with your favorite games and streamsers. </span>
+                   </div>
+                  </a>
+                </li>
+                  <!--e 2 -->
+                <li class="my-2 p-1">
+                  <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                   justify-content-between">
+                   <div class="p-2">
+                     <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/JzYamtSussX.png" 
+                      alt="icon from fb" 
+                      class="rounded-circle" 
+                      style="width: 48px; height: 48px; object-fit: cover;">
+                   </div>
+                   <div>
+                     <p class="m-0">Play Games</p>
+                     <span class="fs-7 text muted"> Play your favourtie games with friends and family. </span>
+                   </div>
+                  </a>
+                </li>
+ 
+                  <!--e 3 -->
+                 <li class="my-2 p-1">
+                   <a href="#" class="text-decoration-none text-dark d-flex align-items-center 
+                    justify-content-between">
+                     <div class="p-2">
+                      <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/XNFKm5WC2yS.png" 
+                       alt="icon from fb" 
+                       class="rounded-circle" 
+                       style="width: 48px; height: 48px; object-fit: cover;">
+                     </div>
+                     <div>
+                       <p class="m-0">Video</p>
+                       <span class="fs-7 text muted"> A video desitination personalized to your interests and connections. </span>
+                     </div>
+                   </a>
+                 </li>
+
+              </div>
+            <hr />
+             <!-- create -->
+              <div>
+                <!-- header -->
+                <li class="p-1 mx-2">
+                  <h2>Create</h2>
+                </li>
+                <!-- c 1  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Post</p>
+                  </div>
+                </a>
+                </li>
+                <!-- c 2  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-book-open"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Story</p>
+                  </div>
+                </a>
+                </li>
+                <!-- c 3  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                  <i class="fa-solid fa-photo-film"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Reel</p>
+                  </div>
+                </a>
+                </li>
+              
+                <!-- c 4  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Life Event</p>
+                  </div>
+                </a>
+                </li>
+                <hr />
+                <!-- c 5  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-flag"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Page</p>
+                  </div>
+                </a>
+                </li>
+                <!-- c 6  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-bullhorn"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Ad</p>
+                  </div>
+                </a>
+                </li>
+                <!-- c 7  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-people-group"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Group</p>
+                  </div>
+                </a>
+                </li>
+                <!-- c 8  -->
+                <li class="my-2 p-1">
+                <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-calendar-plus"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">Event</p>
+                  </div>
+                </a>
+                </li>
+                <!-- c 9  -->
+                <li class="my-2 p-1">
+                  <a href="#" class="text-decoration-none text-dark d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-gray p-1 me-3"
+                  style="width: 38px; height: 38px;"
+                  >
+                    <i class="fa-solid fa-store"></i>
+                  </div>
+                  <div>
+                    <p class="m-0">MarketPlace Listing</p>
+                  </div>
+                  </a>
+                </li>
+              
+              </div>
+            </ul>
+         
+          <!--chat -->
+          <div class ="d-flex align-items-center justify-content-center p-1 mx-2 bg-gray rounded-circle"
+               style="width: 38px; height: 38px; object-fit: cover;" id = "chatMenu" 
+               data-bs-toggle="dropdown" aria-expanded="false" type= "button"
+                data-bs-auto-close="outside">
+            <i class="fa-solid fa-comment"></i>
+          </div>
+          <!-- chat dd -->
+          <ul class="dropdown-menu border-0 shadow p-3 overflow-auto"
+             aria-labelledby="chatMenu" style="width: 23em; max-height: 600px;">
+            <!-- header -->
+            <li class="p-1">
+              <div class = "d-flex justify-content-between">
+                <h2>Message</h2>
+                <!-- icons-->
+                <div>
+                  <!-- setting --> 
+                  <i class ="fa-solid fa-ellipsis text-muted mx-2"></i>
+                  <!-- expand -->
+                  <i class ="fa-solid fa-maximize text-muted mx-2"></i>
+                  <!-- new message -->
+                  <i class ="fa-solid fa-edit text-muted mx-2"></i>
+                </div>
+              </div>
+            </li>
+            <!-- search -->
+             <li class = "p-1">
+                  <div 
+                  class = "input-group-text bg-gray border-0 rounded-pill"
+                  style="min-hieght: 40px; min-width: 230px;"
+                  >
+                  <i class = "fa-solid fa-magnifying-glass  me-2 text-muted"> </i>
+                  <input type="text" class="form-control rounded-pill border-0 bg-gray" placeholder="Search Messenger"/>  
+                  </div>
+                </li>
+            <!-- message 1 -->  
+            <% friendCount = 0%>
+            <% get_users.each_with_index do |user, index| %>
+              <% if current_user.following?(user) %> 
+                <% break unless user.present? %>
+                <% break  if friendCount == 5 %>
+                <% if user.posts.last.present? %>
+                  <li class="my-2 p-1" type="button">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <!-- big avatar -->
+                      <div class ="d-flex align-items-center justify-content-evenly">
+                        <!-- avatar -->
+                        <div class="p-2">
+                          <%=  image_tag(user.avatar, class: "rounded-circle ", style: "width: 58px; height: 58px; object-fit: cover;") if user.avatar.attached? %>
+                          <% unless user.avatar.attached? %>
+                            <img src="https://source.unsplash.com/random/<%= index %>", class= "rounded-circle ", style= "width: 58px; height: 58px; object-fit: cover;" >
+                          <%end%>
+                        </div>
+                        <!-- message -->
+                        <div>
+                          <% friendCount += 1%>
+                          <p class="fs-7 m-0"><%= user.first_name %></p>
+                          <span class ="fs-7 text-muted"><%= user.posts.last.title.truncate(20) if user.posts.last.present? %></span>
+                        </div>
+                      </div>
+                      <!-- small avatar -->
+                      <div class="p-2">
+                        <%=  image_tag(user.avatar, class: "rounded-circle ", style:  "width: 15px; height: 15px; object-fit: cover;") if user.avatar.attached? %>
+                        <% unless user.avatar.attached? %>
+                            <img src="https://source.unsplash.com/random/<%= index %>", class= "rounded-circle ", style= "width: 15px; height: 15px; object-fit: cover;" >
+                          <%end%>
+                      </div>
+                    </div>
+            
+                  </li>
+               <%end%>
+              <%end%>
+            <%end%>
+          </ul>
+          <!--notifications -->
+          <div class ="d-flex align-items-center justify-content-center p-1 mx-2 bg-gray rounded-circle"
+               style="width: 38px; height: 38px; object-fit: cover;" id = "notMenu"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                 type= "button" data-bs-auto-close ="outside">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <!-- not dd -->
+          <ul class="dropdown-menu border-0 shadow p-3 "
+             aria-labelledby="notMenu" style="width: 23em; max-height: 600px; overflow-y: auto">
+            <!-- header-->
+            <li class="p-1">
+              <div class="d-flex justify-content-between ">
+              <h2>Notifications</h2>
+              <div>
+                <!-- icon -->
+                <i class="fa-solid fa-ellipsis-h rounded-circle p-2 bg-gray" 
+                type="button" data-bs-toggle="dropdown"></i>
+                <!-- icon dd -->
+                <ul class="dropdown-menu">
+                  <li class="dropdown-item d-flex align-items-center" type="button">
+                    <i class = "fa-solid fa-check me-3 text-muted"></i>
+                    <p class="m-0">Mark all as read</p>
+                  </li>
+                </ul>
+             </div>
+              </div>
+              <div class="d-flex" type="button">
+                <p class="rounded-pill bg-gray p-2">All</p>
+                <p class="ms-3 rounded-pill bg-primary text-white p-2">Unread</p>
+              </div>
+            </li>
+            <!-- news -->
+            <div class ="d-flex justify-content-between mx-2">
+              <h5>News</h5>
+              <a href="#" class="text-decoration-none">See all</a>
+            </div>
+
+            <!-- n1 -->
+            <% notificationCount = 0 %>
+
+            <div>
+              <% @unread.each do |notification| %>
+                <% break  if notificationCount == 5 %>
+                <li class="my-2 p-1">
+                  <a href="#" 
+                     class="d-flex align-items-center justify-content-evenly text-decoration-none text-dark"> 
+                    <div class= "d-flex align-item-centers justify-content-evenly">
+                      <!-- avatar -->
+                      <div class="p-2">
+                          <%=  image_tag( get_commenter(notification).avatar, class: "rounded-circle ", style: "width: 58px; height: 58px; object-fit: cover;" ) if get_commenter(notification).avatar.attached? %>
+                          <% unless get_commenter(notification).avatar.attached?  %>
+                            <img src="https://source.unsplash.com/random/1", class= "rounded-circle ", style= "width: 58px; height: 58px; object-fit: cover;" >
+                          <%end%>
+                     
+                        </div>
+                      <!-- msg -->
+                      <div>
+                        <% notificationCount += 1 %>
+                        <p class ="fs-7 m-0"> <%= link_to notification.to_notification.message, notification.to_notification.url %></p>
+                        <span class="fs-7 text-primaary"><%= time_ago_in_words(notification.created_at) %> <i class="fa-solid fa-circle fs-7 text-primary"></i></span>
+                      </div>
+                   </div>        
+                 </a>
+               </li>
+              <% end %>
+
+              <% if @read.count > 0 && @unread.count > 0 %>
+        
+              <% elsif @read.count + @unread.count == 0 %>
+
+                <li class="my-2 p-1">
+                  <a href="#" 
+                     class="d-flex align-items-center justify-content-evenly text-decoration-none text-dark"> 
+                    <div class= "d-flex align-item-centers justify-content-evenly">
+                      <!-- avatar -->
+                      <div class="p-2">
+                        <img src="https://source.unsplash.com/random/1" alt="avatar" class="rounded-circle" 
+                             style="width: 58px;height: 58px; object-fit: cover;">
+                      </div>
+                      <!-- msg -->
+                      <div>
+                        <p class ="fs-7 m-0"> .................... No notifications yet ......................</p>
+                        <span class="fs-7 text-primaary"> <i class="fa-solid fa-circle fs-7 text-primary"></i></span>
+                      </div>
+                   </div>
+                  </a>
+               </li> 
+              <% end %>
+
+              <hr />
+              <% @read.each do |notification|  %>
+                <% break  if notificationCount == 5 %>
+                <li class="my-2 p-1">
+                  <a href="#" 
+                     class="d-flex align-items-center justify-content-evenly text-decoration-none text-dark"> 
+                    <div class= "d-flex align-item-centers justify-content-evenly">
+                      <!-- avatar -->
+                        <div class="p-2">
+                          <%=  image_tag( get_commenter(notification).avatar, class: "rounded-circle ", style: "width: 58px; height: 58px; object-fit: cover;" ) if get_commenter(notification).avatar.attached? %>
+                          <% unless get_commenter(notification).avatar.attached?  %>
+                            <img src="https://source.unsplash.com/random/1", class= "rounded-circle ", style= "width: 58px; height: 58px; object-fit: cover;" >
+                          <%end%>
+                     
+                        </div>
+                      <!-- msg -->
+                      <div>
+                        <% notificationCount += 1%>
+                        <p class ="fs-7 m-0"> <%= link_to notification.to_notification.message, notification.to_notification.url %></p>
+                        <span class="fs-7 text-primaary"><%= time_ago_in_words(notification.created_at) %> <i class="fa-solid fa-circle fs-7 text-primary"></i></span>
+                      </div>
+                   </div>
+                  </a>
+                </li>
+              <% end %>
+     
+            </div> 
+
+          </ul>
+
+          <!--secondary menu -->
+          <div class ="d-flex align-items-center justify-content-center p-1 mx-2 bg-gray rounded-circle"
+               style="width: 38px; height: 38px; object-fit: cover;" id = "secMenu"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                 type= "button" data-bs-auto-close ="outside">
+            <i class="fa-solid fa-caret-down"></i>
+          </div>
+          <!-- sec dd -->
+          <ul class="dropdown-menu border-0 shadow p-3 "
+             aria-labelledby="sectMenu" style="width: 23em; max-height: 600px; ">
+             <!-- avatar -->
+             <li class="dropdown-item p-1 rounded d-flex" type="button">
+              <%=  image_tag(current_user.avatar, class: "rounded-circle me-2 ", style: "width: 45px; height: 45px; object-fit: cover;") if current_user.avatar.attached? %>
+              <% unless current_user.avatar.attached? %>
+                <img src="https://source.unsplash.com/collection/happy-people", class= "rounded-circle me-2", style= "width: 45px; height: 45px; object-fit: cover;" >
+              <%end%>
+              <div>
+                <p class="m-0"><%= current_user.first_name %></p>
+                <%= link_to "See Your Profile", user_path(current_user), class: "m-0 text-muted" %>
+                
+              </div>
+             </li>
+             <!-- feedback -->
+             
+             
+             <!-- options -->
+             <hr>
+
+             <!-- o 1 -->
+             <li class="dropdown-item p-1 my-3 rounded" type="button">
+               <ul class="navbar-nav">
+               <li class="nav-items">
+                 <div class ="d-flex"> 
+                   <!-- icon-->
+                   <i class="fa-solid fa-cog bg-gray p-2 rounded-circle"></i>
+                   <div class="d-flex justify-content-between align-items-center w-100 ms-3">
+                     <p class="m-0">Settings & Privacy </p>
+                     <i class = "fa-solid fa-chevron-right"></i>
+                   </div>
+                 </div>
+               </li>
+               </ul>
+             </li>
+
+             <!--  o 3 -->
+             <li class="dropdown-item p-1 my-3 rounded" type="button">
+               <ul class="navbar-nav">
+               <li class="nav-items">
+                 <div class ="d-flex"> 
+                   <!-- icon-->
+                   <i class="fa-solid fa-circle-question bg-gray p-2 rounded-circle"></i>
+                   <div class="d-flex justify-content-between align-items-center w-100 ms-3">
+                     <p class="m-0">Help and Support </p>
+                     <i class = "fa-solid fa-chevron-right"></i>
+                   </div>
+                 </div>
+               </li>
+               </ul>
+             </li>
+               <!-- o 2 -->
+             <li class="dropdown-item p-1 my-3 rounded" type="button">
+               <ul class="navbar-nav">
+               <li class="nav-items">
+                 <div class ="d-flex"> 
+                   <!-- icon-->
+                   <i class="fa-solid fa-moon bg-gray p-2 rounded-circle"></i>
+                   <div class="d-flex justify-content-between align-items-center w-100 ms-3">
+                     <p class="m-0">Display & accessibilty </p>
+                     <i class = "fa-solid fa-chevron-right"></i>
+                   </div>
+                 </div>
+               </li>
+               </ul>
+             </li>
+
+               <!-- o 2 -->
+             <li class="dropdown-item p-1 my-3 rounded" type="button">
+               <ul class="navbar-nav">
+               <li class="nav-items">
+                 <div class ="d-flex"> 
+                   <!-- icon-->
+               <i class="fa-solid fa-circle-exclamation bg-gray p-2 rounded-circle"></i>
+                   <div class="d-flex justify-content-between align-items-center w-100 ms-3">
+                     <p class="m-0">Give Feedback </p>
+                    
+                   </div>
+                 </div>
+               </li>
+               </ul>
+             </li>
+
+                <!-- o 2 -->
+             <li class="dropdown-item p-1 my-3 rounded" type="button">
+               <ul class="navbar-nav">
+               <li class="nav-items">
+                 <div class ="d-flex"> 
+                   <!-- icon-->
+                   <i class="fa-solid fa-right-from-bracket bg-gray p-2 rounded-circle"></i>
+                   <div class="d-flex justify-content-between align-items-center w-100 ms-3">
+                     <p class="m-0 ">  <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, style: "color: inherit; text-decoration: none"%> 
+ </p>
+                    
+                   </div>
+                 </div>
+               </li>
+               </ul>
+             </li>
+
+            
+
+
+          
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+    </div>

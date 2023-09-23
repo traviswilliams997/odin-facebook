@@ -1,11 +1,26 @@
-
-<div style="border: 1px solid black;">
+  <hr /> 
  <div id="comment-body-<%= comment.id %>" >
+
     <%= comment.body %>
   </div>
-  <%= render partial: 'likes/button', locals: { likeable: comment }%>
- <hr />  
-  <%= comment.user.email %><br />
+ <hr /> 
+ 
+ <div class="d-flex justify-items-evenly w-100">
+ <div>
+                <%=  image_tag(comment.user.avatar, class: "rounded-circle me-2", style:  "width: 38px; height: 38px; object-fit: cover;") if comment.user.avatar.attached? %>
+                <% unless comment.user.avatar.attached? %>
+                  <img src="https://source.unsplash.com/collection/happy-people", class= "rounded-circle me-2", style= "width: 38px; height: 38px; object-fit: cover;" >
+                <%end%>
+                  <p class="m-0 fw-bold">
+                    <%= comment.user.first_name %>
+                  </p>
+                  </div>
+                  <div >
+                    <%= render partial: 'likes/button', locals: { likeable: comment }%>
+                  </div>
+</div> 
+                  
+<div>
   <% if (comment.updated_at - comment.created_at) > 1 %>
     <span>Edited <%= time_ago_in_words(comment.updated_at) %> ago</span>
   <% else %>
@@ -13,6 +28,7 @@
   <% end %>
 
   <%if current_user == comment.user %>
+  <p>
     <%= link_to "Edit", nil, remote: true,  data: {
         controller: "comments",
         action: "comments#toggleForm",
@@ -20,10 +36,12 @@
         comments_body_param: "comment-body-#{comment.id}",
         comments_edit_param: "edit-button-#{comment.id}"
       },
-      id: "edit-button-#{comment.id}" %>
+      id: "edit-button-#{comment.id}" %>  |
 
 
-    <%= button_to "Delete", [post, comment], method: :delete %>
+    <%= link_to "Delete", [post, comment], data: { "turbo-method": :delete } %>
+
+    </p>
 
    <div id="edit-form-<%= comment.id%>" class = 'hideform'>
       <%= render 'comments/form',
