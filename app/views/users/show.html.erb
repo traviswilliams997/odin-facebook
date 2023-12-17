@@ -40,22 +40,16 @@
         <hr>
         <h2>Your Posts</h2>
         <% @user.posts.each do |post| %>
-          <div class="bg-white p-4 rounded shadow mt-3" style="max-width: 500px;">
+          <div class="bg-white p-4 rounded shadow mt-3" style="max-width: 1500px;">
             <div>
-              <p>
-                <strong>Title:</strong>
-                <%= post.title %>
-              </p>
-
-              <p>
-                <strong>Body:</strong>
+              <hr>
+              <p class="mx-5 fs-4">
                 <%= post.body %>
               </p>
+              <hr>
             </div>
             <%= render partial: 'likes/button', locals: { likeable: post }%>
-            <p>
-              <%= link_to "Show this post", post %>
-            </p>
+        
             <% get_comments(post).each do |comment| %>
               <div class="bg-gray">
                 <%= render 'comments/comment', 

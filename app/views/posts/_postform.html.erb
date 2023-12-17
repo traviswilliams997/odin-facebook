@@ -1,0 +1,6 @@
+<%= form_with(model: @post) do |form| %>
+  <div class= "form-control rounded-pil border-0 bg-gray pointer" style = "width: 550px;" >
+    <%= form.rich_text_area :body,  placeholder: "What's on your mind?",  style: "width: 500px;"%>
+    <%= form.submit %>
+  </div>
+<% end %>
